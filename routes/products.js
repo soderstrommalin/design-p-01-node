@@ -1,10 +1,8 @@
-const {Router} = require('express')
-const router = new Router()
+const { Router } = require("express");
+const router = new Router();
 
-const productsDB = require('../db/products')
+const productsDB = require("../api/products");
 
+router.get("/products", productsDB.getAllProducts);
 
-router.get('/products', productsDB.getAllProducts)
-
-
-module.exports = router
+module.exports = router;

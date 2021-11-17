@@ -1,9 +1,8 @@
-const {Router} = require('express')
-const router = new Router()
+const { Router } = require("express");
+const router = new Router();
 
-const cartsDB = require('../db/carts')
+const cartsDB = require("../api/carts");
 
-router.get('/carts/:userLogin', cartsDB.getAllCarts)
+router.get("/carts/:userLogin", cartsDB.getAllCarts);
 
-
-module.exports = router
+module.exports = router;
