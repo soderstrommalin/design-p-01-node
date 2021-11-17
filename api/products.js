@@ -43,15 +43,28 @@ const postProduct = async (req, res, next) => {
     }
 };
 
-const editProduct = async (req, res, next) => {
+const editProductById = async (req, res, next) => {
     const { id } = req.params;
     const { name, price } = req.body;
-    const product = productsArr.findIndex((prod) => prod.id == id);
-    if (name !== undefined) productsArr[product].name = name;
-    if (price !== undefined) productsArr[product].price = price;
+    const productIndex = productsArr.findIndex((prod) => prod.id == id);
+    if (name !== undefined) productsArr[productIndex].name = name;
+    if (price !== undefined) productsArr[productIndex].price = price;
     try {
         res.json({
             msg: "Product edited",
+        }).status(200); //skriv model för products
+    } catch (err) {
+        next(err);
+    }
+};
+
+const deleteProductById = async (req, res, next) => {
+    const { id } = req.params;
+    const productIndex = productsArr.findIndex((prod) => prod.id == id);
+    productsArr.splice(productIndex, 1);
+    try {
+        res.json({
+            msg: "Product deleted",
         }).status(200); //skriv model för products
     } catch (err) {
         next(err);
@@ -62,5 +75,6 @@ module.exports = {
     getAllProducts,
     getProductById,
     postProduct,
-    editProduct,
+    editProductById,
+    deleteProductById,
 };
