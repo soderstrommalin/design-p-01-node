@@ -1,9 +1,8 @@
-const {Router} = require('express')
-const router = new Router()
+const { Router } = require("express");
+const router = new Router();
 
-const usersDB = require('../db/users')
+const usersDB = require("../api/users");
 
-router.get('/users', usersDB.getAllUsers)
+router.get("/users", usersDB.getAllUsers);
 
-
-module.exports = router
+module.exports = router;
