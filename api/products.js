@@ -25,9 +25,9 @@ const getProductById = async (req, res, next) => {
 };
 
 const postProduct = async (req, res, next) => {
-    const product = req.body;
+    const {name, price}= req.body;
     try {
-        productsModel.postProduct(product)
+        productsModel.postProduct(name, price)
         res.json({
             msg: "Product added",
         });

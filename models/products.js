@@ -1,4 +1,5 @@
 const { database } = require("../db/database.js");
+const { v4: uuidv4 } = require('uuid');
 
 const productsArr = [];
 database[0].products.forEach((r) => productsArr.push(r));
@@ -19,7 +20,12 @@ const getProductById = (id) => {
     return product
 }
 
-const postProduct = (product) => {
+const postProduct = (name, price) => {
+    const product = {
+        id: uuidv4(),
+        name: name,
+        price: price
+    }
     productsArr.push(product);
 }
 
