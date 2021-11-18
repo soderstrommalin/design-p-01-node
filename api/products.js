@@ -1,13 +1,12 @@
-const { database } = require("../db/database.js");
+const productsModel = require('../models/products')
 
-const productsArr = [];
-database[0].products.forEach((r) => productsArr.push(r));
 
 const getAllProducts = async (req, res, next) => {
     try {
+        const products = productsModel.getAllProducts()
         res.json({
-            data: productsArr,
-        }).status(200); //skriv model för products
+            data: products,
+        });
     } catch (err) {
         next(err);
     }
@@ -15,17 +14,11 @@ const getAllProducts = async (req, res, next) => {
 
 const getProductById = async (req, res, next) => {
     const { id } = req.params;
-    const product = productsArr.find((prod, index) => {
-        if (prod.id == id) {
-            return prod;
-        } else {
-            return 0;
-        }
-    });
     try {
+        const product = productsModel.getProductById(id)
         res.json({
             data: product,
-        }).status(200); //skriv model för products
+        });
     } catch (err) {
         next(err);
     }
@@ -33,11 +26,11 @@ const getProductById = async (req, res, next) => {
 
 const postProduct = async (req, res, next) => {
     const product = req.body;
-    productsArr.push(product);
     try {
+        productsModel.postProduct(product)
         res.json({
             msg: "Product added",
-        }).status(200); //skriv model för products
+        });
     } catch (err) {
         next(err);
     }
@@ -46,13 +39,11 @@ const postProduct = async (req, res, next) => {
 const editProductById = async (req, res, next) => {
     const { id } = req.params;
     const { name, price } = req.body;
-    const productIndex = productsArr.findIndex((prod) => prod.id == id);
-    if (name !== undefined) productsArr[productIndex].name = name;
-    if (price !== undefined) productsArr[productIndex].price = price;
     try {
+        productsModel.editProductById(id, name, price)
         res.json({
             msg: "Product edited",
-        }).status(200); //skriv model för products
+        });
     } catch (err) {
         next(err);
     }
@@ -60,12 +51,11 @@ const editProductById = async (req, res, next) => {
 
 const deleteProductById = async (req, res, next) => {
     const { id } = req.params;
-    const productIndex = productsArr.findIndex((prod) => prod.id == id);
-    productsArr.splice(productIndex, 1);
     try {
+        productsModel.deleteProductById(id)
         res.json({
             msg: "Product deleted",
-        }).status(200); //skriv model för products
+        });
     } catch (err) {
         next(err);
     }
