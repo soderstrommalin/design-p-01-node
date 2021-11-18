@@ -1,15 +1,16 @@
+const cartsModel = require("../models/carts")
 
-const getAllCarts = async (req, res, next) => {
-    const user = req.params.userLogin
-    try{
-        res.json({message: `cart for user ${user}`}) //skriv model för carts
-    } catch(err){
-        next(err)
-    }
-}
+const getUserCart = async (req, res, next) => {}
 
+const addToUserCart = async (req, res, next) => {}
 
+const editItemInCart = async (req, res, next) => {}
 
-module.exports={
-    getAllCarts
+const deleteItemInCart = async (req, res, next) => {}
+
+module.exports = {
+  getUserCart,
+  addToUserCart,
+  editItemInCart,
+  deleteItemInCart,
 }
