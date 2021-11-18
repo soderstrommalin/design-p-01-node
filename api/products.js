@@ -1,9 +1,8 @@
-const productsModel = require('../models/products')
-
+const productsModel = require("../models/products");
 
 const getAllProducts = async (req, res, next) => {
     try {
-        const products = productsModel.getAllProducts()
+        const products = productsModel.getAllProducts();
         res.json({
             data: products,
         });
@@ -15,7 +14,7 @@ const getAllProducts = async (req, res, next) => {
 const getProductById = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const product = productsModel.getProductById(id)
+        const product = productsModel.getProductById(id);
         res.json({
             data: product,
         });
@@ -24,10 +23,13 @@ const getProductById = async (req, res, next) => {
     }
 };
 
-const postProduct = async (req, res, next) => {
-    const {name, price}= req.body;
+const postProduct = async (req, res, next, err) => {
+    const { name, price } = req.body;
+    if (name === undefined || price === undefined) {
+        next(err);
+    }
     try {
-        productsModel.postProduct(name, price)
+        productsModel.postProduct(name, price);
         res.json({
             msg: "Product added",
         });
@@ -40,7 +42,7 @@ const editProductById = async (req, res, next) => {
     const { id } = req.params;
     const { name, price } = req.body;
     try {
-        productsModel.editProductById(id, name, price)
+        productsModel.editProductById(id, name, price);
         res.json({
             msg: "Product edited",
         });
@@ -52,7 +54,7 @@ const editProductById = async (req, res, next) => {
 const deleteProductById = async (req, res, next) => {
     const { id } = req.params;
     try {
-        productsModel.deleteProductById(id)
+        productsModel.deleteProductById(id);
         res.json({
             msg: "Product deleted",
         });
