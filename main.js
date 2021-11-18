@@ -3,7 +3,7 @@ const app = require("./index");
 const start = (port) => {
     try {
         app.listen(port, () => {
-            console.log(`Api running at http://localhost:${port}`);
+            console.log(`This is running on port ${port}`);
         });
     } catch (err) {
         console.error(err);
