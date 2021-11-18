@@ -1,5 +1,9 @@
 const productsModel = require("../models/products");
-const {InvalidCredentials, NoExsistingProduct, WrongDataType} = require('../errors/errors.js')
+const {
+    InvalidCredentials,
+    NoExsistingProduct,
+    WrongDataType,
+} = require("../errors/errors.js");
 
 const getAllProducts = async (req, res, next) => {
     try {
@@ -16,9 +20,6 @@ const getProductById = async (req, res, next) => {
     const { id } = req.params;
     try {
         const product = productsModel.getProductById(id);
-        if(product == undefined){
-            throw new NoExsistingProduct()
-        }
         res.json({
             data: product,
         });
@@ -30,10 +31,10 @@ const getProductById = async (req, res, next) => {
 const postProduct = async (req, res, next, err) => {
     const { name, price } = req.body;
     if (name === undefined || price === undefined) {
-        throw new InvalidCredentials()
+        throw new InvalidCredentials();
     }
-    if( typeof name !== 'string' || typeof price !== 'number' ){
-        throw new WrongDataType()
+    if (typeof name !== "string" || typeof price !== "number") {
+        throw new WrongDataType();
     }
     try {
         productsModel.postProduct(name, price);
@@ -49,10 +50,7 @@ const editProductById = async (req, res, next) => {
     const { id } = req.params;
     const { name, price } = req.body;
     try {
-       const product = productsModel.editProductById(id, name, price);
-        if(product == undefined){
-            throw new NoExsistingProduct()
-        }
+        const product = productsModel.editProductById(id, name, price);
         res.json({
             msg: "Product edited",
         });
