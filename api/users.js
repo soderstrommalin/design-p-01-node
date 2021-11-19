@@ -1,5 +1,6 @@
 const usersModel = require("../models/users")
 const { v4: uuidv4 } = require("uuid");
+const {InvalidBody,NoExistingUser} = require("../errors/errors.js")
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -25,10 +26,11 @@ const getUserById = async (req, res, next) => {
 }
 
 const createNewUser = async (req, res, next) => {
-    console.log('controller')
     const { name } = req.body
+    
     const login = uuidv4()
     try {
+      if(name == undefined) throw new InvalidBody(['name'])
       usersModel.postUser(name, login)
       res.json({
         msg: "User added",

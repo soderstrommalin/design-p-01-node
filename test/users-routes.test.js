@@ -8,8 +8,26 @@ describe("Test GET /api/users/", () => {
   })
 })
 
-describe("Test GET /api/users/:id", () => {})
+describe("Test GET /api/users/:id", () => {
+  test("Test invalid id", async () => {
+    await request.get(`/api/users/123`)
+    expect(404)
+  })
+})
 
-describe("Test POST /api/users/", () => {})
+describe("Test POST /api/users/", () => {
+  test("Test invalid body", async () => {
+    await request.post(`/api/users/`).send({
+      kalle: "kalle",
+      daphne: "malin"
+    })
+    expect(400)
+  })
+})
 
-describe("Test DELETE /api/users/", () => {})
+describe("Test DELETE /api/users/", () => {
+  test("Test invalid id", async () => {
+    await request.delete(`/api/users/123`)
+    expect(404)
+  })
+})

@@ -24,7 +24,8 @@ const postUser = (name) => {
 }
 
 const deleteUserById = (id) => {
-  const userIndex = usersArr.findIndex((user) => user.id == id)
+  const userIndex = usersArr.findIndex((user) => user.login == id)
+  if(userIndex == undefined) throw new NoExistingUser()
   usersArr.splice(userIndex, 1)
 }
 

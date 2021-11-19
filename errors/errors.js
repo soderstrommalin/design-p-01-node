@@ -34,6 +34,15 @@ class NoExistingUser extends TaskManagerError{
   }
 }
 
+class InvalidBody extends TaskManagerError {
+  constructor(fields) {
+    super()
+    this.fields = fields
+    this.message = `invalid body, require ${this.fields.join(" & ")}`
+    this.errorCode = 400
+  }
+}
+
 
 
 module.exports = {
@@ -41,5 +50,6 @@ module.exports = {
   InvalidCredentials,
   NoExsistingProduct,
   WrongDataType,
-  NoExistingUser
+  NoExistingUser,
+  InvalidBody
   }

@@ -30,13 +30,11 @@ const getProductById = async (req, res, next) => {
     }
 };
 
-const postProduct = async (req, res, next, err) => {
+const postProduct = async (req, res, next) => {
     const { name, price } = req.body;
-    if (name === undefined || price === undefined) {
-        throw new InvalidCredentials();
-    }
-    checkDataType(name, price);
     try {
+        checkDataType(name, price);
+        if (name === undefined || price === undefined) throw new InvalidCredentials();
         productsModel.postProduct(name, price);
         res.json({
             msg: "Product added",
