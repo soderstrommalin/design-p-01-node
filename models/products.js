@@ -41,7 +41,13 @@ const editProductById = (id, name, price) => {
 };
 
 const deleteProductById = (id) => {
-    const productIndex = productsArr.findIndex((prod) => prod.id == id);
+    const productIndex = productsArr.findIndex((prod) => {
+        if (prod.id == id) {
+            return prod;
+        } else {
+            throw new NoExsistingProduct();
+        }
+    });
     productsArr.splice(productIndex, 1);
 };
 

@@ -1,4 +1,6 @@
 const productsModel = require("../models/products");
+const { checkDataType } = require("../utils");
+
 const {
     InvalidCredentials,
     NoExsistingProduct,
@@ -33,9 +35,7 @@ const postProduct = async (req, res, next, err) => {
     if (name === undefined || price === undefined) {
         throw new InvalidCredentials();
     }
-    if (typeof name !== "string" || typeof price !== "number") {
-        throw new WrongDataType();
-    }
+    checkDataType(name, price);
     try {
         productsModel.postProduct(name, price);
         res.json({
@@ -49,6 +49,7 @@ const postProduct = async (req, res, next, err) => {
 const editProductById = async (req, res, next) => {
     const { id } = req.params;
     const { name, price } = req.body;
+    checkDataType(name, price);
     try {
         const product = productsModel.editProductById(id, name, price);
         res.json({

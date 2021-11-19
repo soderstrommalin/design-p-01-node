@@ -59,4 +59,18 @@ describe("Test PUT /api/products/:id", () => {
         });
         expect(404);
     });
+    test("Wrong Data Type", async () => {
+        await request.post(`/api/products/${id}`).send({
+            name: 3213,
+            price: "55",
+        });
+        expect(403);
+    });
+});
+
+describe("Test DELETE /api/products/:id", () => {
+    test("Trying to delete none exsisting id", async () => {
+        await request.delete(`/api/products/123`);
+        expect(404);
+    });
 });
