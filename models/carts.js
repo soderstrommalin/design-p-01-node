@@ -1,16 +1,20 @@
-const { database } = require("../db/database.js")
+const { database } = require("../db/database.js");
 
-const getUserCart = () => {}
+const cartArr = database[0].carts;
+const getUserCart = (id) => {
+    const cartIndex = cartArr.findIndex((r) => r.login == id);
+    return cartArr[cartIndex].cart;
+};
 
-const addToUserCart = () => {}
+const addToUserCart = () => {};
 
-const editItemInCart = () => {}
+const editItemInCart = () => {};
 
-const deleteItemInCart = (id) => {}
+const deleteItemInCart = (id) => {};
 
 module.exports = {
-  getUserCart,
-  addToUserCart,
-  editItemInCart,
-  deleteItemInCart,
-}
+    getUserCart,
+    addToUserCart,
+    editItemInCart,
+    deleteItemInCart,
+};
