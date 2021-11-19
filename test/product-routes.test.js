@@ -3,7 +3,6 @@ const app = require("../index.js");
 const request = supertest(app);
 const id = "152164826489";
 
-
 describe("Test GET /api/products", () => {
     test("Test uniqe product ids", async () => {
         const res = await request.get("/api/products");
@@ -16,7 +15,6 @@ describe("Test GET /api/products", () => {
         expect(200);
     });
 });
-
 
 describe("Test GET /api/products/:id", () => {
     test("Test typeof price's value", async () => {
@@ -31,7 +29,6 @@ describe("Test GET /api/products/:id", () => {
         expect(404);
     });
 });
-
 
 describe("Test POST /api/products/", () => {
     test("Test invalid credentials", async () => {
@@ -57,9 +54,9 @@ describe("Test POST /api/products/", () => {
 describe("Test PUT /api/products/:id", () => {
     test("Trying to update none exsisting id", async () => {
         await request.put(`/api/products/123`).send({
-            name: 'Glassbåt',
+            name: "Glassbåt",
             price: 12,
         });
-        expect(404)
+        expect(404);
     });
 });
