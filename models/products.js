@@ -9,13 +9,8 @@ const getAllProducts = () => {
 };
 
 const getProductById = (id) => {
-    const product = productsArr.find((prod, index) => {
-        if (prod.id == id) {
-            return prod;
-        } else {
-            throw new NoExsistingProduct();
-        }
-    });
+    const product = productsArr.find((prod) => prod.id == id);
+    if(product == undefined) throw new NoExsistingProduct()
     return product;
 };
 

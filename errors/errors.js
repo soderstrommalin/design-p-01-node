@@ -24,11 +24,22 @@ class WrongDataType extends TaskManagerError{
   }
 }
 
+/****** Users ******/
+
+class NoExistingUser extends TaskManagerError{
+  constructor(){
+    super()
+    this.message = "Couldn't find user"
+    this.errorCode = 404
+  }
+}
+
 
 
 module.exports = {
   TaskManagerError,
   InvalidCredentials,
   NoExsistingProduct,
-  WrongDataType
+  WrongDataType,
+  NoExistingUser
   }
