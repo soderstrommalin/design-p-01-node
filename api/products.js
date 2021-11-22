@@ -33,7 +33,9 @@ const getProductById = async (req, res, next) => {
 const postProduct = async (req, res, next) => {
     const { name, price } = req.body;
     try {
-        checkDataType(name, price);
+        if(!checkDataType(name, price)){
+            throw new WrongDataType()
+        }
         if (name === undefined || price === undefined) throw new InvalidCredentials();
         productsModel.postProduct(name, price);
         res.json({
@@ -47,8 +49,10 @@ const postProduct = async (req, res, next) => {
 const editProductById = async (req, res, next) => {
     const { id } = req.params;
     const { name, price } = req.body;
-    checkDataType(name, price);
     try {
+        if(!checkDataType(name, price)){
+            throw new WrongDataType()
+        }
         const product = productsModel.editProductById(id, name, price);
         res.json({
             msg: "Product edited",

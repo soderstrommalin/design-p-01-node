@@ -1,9 +1,11 @@
-const { WrongDataType } = require("./errors/errors");
+const { WrongDataType } = require("./errors/errors.js");
 
 const checkDataType = (name, price) => {
     if (typeof name !== "string" || typeof price !== "number") {
-        throw new WrongDataType();
+        
+        return false
     }
+    return true
 };
 
 module.exports = { checkDataType };

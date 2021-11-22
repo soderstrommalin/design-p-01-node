@@ -62,11 +62,18 @@ describe("Test PUT /api/products/:id", () => {
         expect(res.status).toBe(404);
     });
     test("Test wrong Data Type", async () => {
-        const res = await request.post(`/api/products/${id}`).send({
+        const res = await request.put(`/api/products/${id}`).send({
             name: 3213,
             price: "55",
         });
-        expect(res.status).toBe(404);
+        expect(res.status).toBe(403);
+    });
+    test("Test trying to update product, should return status 200", async () => {
+        const res = await request.put(`/api/products/${id}`).send({
+            name: "Glassbåt",
+            price: 12,
+        });
+        expect(res.status).toBe(200);
     });
 });
 
