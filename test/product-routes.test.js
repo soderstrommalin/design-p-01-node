@@ -11,8 +11,9 @@ describe("Test GET /api/products", () => {
         const totalUniqeIds = new Set(uniqeIds).size;
         expect(res.body.data.length).toBe(totalUniqeIds);
     });
-    test("Test response status", async () => {
-        expect(200);
+    test("Test response status to be 200", async () => {
+        const res = await request.get("/api/products");
+        expect(res.status).toBe(200);
     });
 });
 
@@ -21,56 +22,57 @@ describe("Test GET /api/products/:id", () => {
         const res = await request.get(`/api/products/${id}`);
         expect(typeof res.body.data.price).toBe("number");
     });
-    test("Test response status", async () => {
-        expect(200);
+    test("Test response status to be 200", async () => {
+        const res = await request.get(`/api/products/${id}`);
+        expect(res.status).toBe(200);
     });
-    test("Product not found", async () => {
+    test("Test product not found", async () => {
         const res = await request.get(`/api/products/123`);
-        expect(404);
+        expect(res.status).toBe(404);
     });
 });
 
 describe("Test POST /api/products/", () => {
     test("Test invalid credentials", async () => {
-        await request.post(`/api/products/`).send({});
-        expect(403);
+        const res = await request.post(`/api/products/`).send({});
+        expect(res.status).toBe(403);
     });
-    test("Test valid credentials", async () => {
-        await request.post(`/api/products/`).send({
+    test("Test response status to be 200", async () => {
+        const res = await request.post(`/api/products/`).send({
             name: "water melon",
             price: 55,
         });
-        expect(200);
+        expect(res.status).toBe(200);
     });
-    test("Wrong Data Type", async () => {
-        await request.post(`/api/products/`).send({
+    test("Test wrong Data Type", async () => {
+        const res = await request.post(`/api/products/`).send({
             name: 3213,
             price: "55",
         });
-        expect(403);
+        expect(res.status).toBe(403);
     });
 });
 
 describe("Test PUT /api/products/:id", () => {
-    test("Trying to update none exsisting id", async () => {
-        await request.put(`/api/products/123`).send({
+    test("Test trying to update none exsisting id", async () => {
+        const res = await request.put(`/api/products/123`).send({
             name: "Glassbåt",
             price: 12,
         });
-        expect(404);
+        expect(res.status).toBe(404);
     });
-    test("Wrong Data Type", async () => {
-        await request.post(`/api/products/${id}`).send({
+    test("Test wrong Data Type", async () => {
+        const res = await request.post(`/api/products/${id}`).send({
             name: 3213,
             price: "55",
         });
-        expect(403);
+        expect(res.status).toBe(404);
     });
 });
 
 describe("Test DELETE /api/products/:id", () => {
-    test("Trying to delete none exsisting id", async () => {
-        await request.delete(`/api/products/123`);
-        expect(404);
+    test("Test trying to delete none exsisting id", async () => {
+        const res = await request.delete(`/api/products/123`);
+        expect(res.status).toBe(404);
     });
 });
