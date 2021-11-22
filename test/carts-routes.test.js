@@ -3,9 +3,9 @@ const app = require("../index.js")
 const request = supertest(app)
 
 describe("Test GET /api/carts/:userLogin", () => {
-  test("Test response status", async () => {
-    await request.get("/api/products")
-    expect(200)
+  test("Test trying to get cart by user id, should return response status 200", async () => {
+    const res = await request.get("/api/carts/403274618461")
+    expect(res.status).toBe(200)
   })
 })
 

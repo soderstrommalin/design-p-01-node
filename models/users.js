@@ -1,17 +1,17 @@
 const { database } = require("../db/database.js")
 const { v4: uuidv4 } = require("uuid")
-const { NoExistingUser } = require("../errors/errors.js");
+const { NoExistingUser } = require("../errors/errors.js")
 
-const usersArr = []
-database[0].users.forEach((user) => usersArr.push(user))
+const allUsers = []
+database[0].users.forEach((user) => allUsers.push(user))
 
 const getAllUsers = () => {
-  return usersArr
+  return allUsers
 }
 
 const getUserById = (id) => {
-  const userById = usersArr.find((user) => user.login === id)
-  if(userById == undefined) throw new NoExistingUser()
+  const userById = allUsers.find((user) => user.login === id)
+  if (userById == undefined) throw new NoExistingUser()
   return userById
 }
 
@@ -20,13 +20,13 @@ const postUser = (name) => {
     name: name,
     login: uuidv4(),
   }
-  usersArr.push(user)
+  allUsers.push(user)
 }
 
 const deleteUserById = (id) => {
-  const userIndex = usersArr.findIndex((user) => user.login == id)
-  if(userIndex == undefined) throw new NoExistingUser()
-  usersArr.splice(userIndex, 1)
+  const userIndex = allUsers.findIndex((user) => user.login == id)
+  if (userIndex == undefined) throw new NoExistingUser()
+  allUsers.splice(userIndex, 1)
 }
 
 module.exports = {

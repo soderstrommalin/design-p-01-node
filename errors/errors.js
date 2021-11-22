@@ -1,23 +1,22 @@
-class TaskManagerError extends Error {}
+class ErrorManager extends Error {}
 
-
-class InvalidCredentials extends TaskManagerError{
-  constructor(){
-      super()
-      this.message = "invalid credentials"
-      this.errorCode = 403
+class InvalidCredentials extends ErrorManager {
+  constructor() {
+    super()
+    this.message = "invalid credentials"
+    this.errorCode = 403
   }
 }
 
-class NoExsistingProduct extends TaskManagerError{
-  constructor(){
+class NoExsistingProduct extends ErrorManager {
+  constructor() {
     super()
     this.message = "Couldn't find any product"
     this.errorCode = 404
   }
 }
-class WrongDataType extends TaskManagerError{
-  constructor(){
+class WrongDataType extends ErrorManager {
+  constructor() {
     super()
     this.message = "Wrong data type of credentials"
     this.errorCode = 403
@@ -26,15 +25,15 @@ class WrongDataType extends TaskManagerError{
 
 /****** Users ******/
 
-class NoExistingUser extends TaskManagerError{
-  constructor(){
+class NoExistingUser extends ErrorManager {
+  constructor() {
     super()
     this.message = "Couldn't find user"
     this.errorCode = 404
   }
 }
 
-class InvalidBody extends TaskManagerError {
+class InvalidBody extends ErrorManager {
   constructor(fields) {
     super()
     this.fields = fields
@@ -43,13 +42,11 @@ class InvalidBody extends TaskManagerError {
   }
 }
 
-
-
 module.exports = {
-  TaskManagerError,
+  ErrorManager,
   InvalidCredentials,
   NoExsistingProduct,
   WrongDataType,
   NoExistingUser,
-  InvalidBody
-  }
+  InvalidBody,
+}
