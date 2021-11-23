@@ -10,7 +10,7 @@ const getAllProducts = () => {
 
 const getProductById = (id) => {
     const product = productsArr.find((prod) => prod.id == id);
-    if(product == undefined) throw new NoExsistingProduct()
+    if (product == undefined) throw new NoExsistingProduct();
     return product;
 };
 
@@ -24,25 +24,15 @@ const postProduct = (name, price) => {
 };
 
 const editProductById = (id, name, price) => {
-    const productIndex = productsArr.findIndex((prod) => {
-        if (prod.id == id) {
-            return prod;
-        } else {
-            throw new NoExsistingProduct();
-        }
-    });
-    if (name !== undefined) productsArr[productIndex].name = name;
-    if (price !== undefined) productsArr[productIndex].price = price;
+    const productIndex = database[0].products.findIndex((prod) => prod.id == id);
+    if (productIndex == -1) throw new NoExsistingProduct();
+    if (name !== undefined) database[0].products[productIndex].name = name;
+    if (price !== undefined) database[0].products[productIndex].price = price;
 };
 
 const deleteProductById = (id) => {
-    const productIndex = productsArr.findIndex((prod) => {
-        if (prod.id == id) {
-            return prod;
-        } else {
-            throw new NoExsistingProduct();
-        }
-    });
+    const productIndex = productsArr.findIndex((prod) => prod.id == id);
+    if (productIndex == -1) throw new NoExsistingProduct();
     productsArr.splice(productIndex, 1);
 };
 
