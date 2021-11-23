@@ -24,8 +24,13 @@ const postUser = (name) => {
 }
 
 const deleteUserById = (id) => {
-  const userIndex = allUsers.findIndex((user) => user.login == id)
-  if (userIndex == undefined) throw new NoExistingUser()
+  const userIndex = allUsers.findIndex((user) => {
+    if (user.login == id) {
+      return user
+    } else {
+      throw new NoExistingUser()
+    }
+  })
   allUsers.splice(userIndex, 1)
 }
 
