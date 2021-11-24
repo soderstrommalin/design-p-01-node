@@ -1,12 +1,12 @@
 const cartsModel = require("../models/carts");
 
-const getUserCart = async (req, res, next) => {
+const getUserCart = (req, res, next) => {
     const { userLogin } = req.params;
     try {
-        const cart = await cartsModel.getUserCart(userLogin)
+        const cart = cartsModel.getUserCart(userLogin);
         res.json({ data: cart });
     } catch (err) {
-        return err;
+        next(err);
     }
 };
 
