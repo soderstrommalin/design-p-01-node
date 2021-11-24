@@ -3,7 +3,8 @@ const cartsModel = require("../models/carts");
 const getUserCart = async (req, res, next) => {
     const { userLogin } = req.params;
     try {
-        res.json({ data: cartsModel.getUserCart(userLogin) });
+        const cart = await cartsModel.getUserCart(userLogin)
+        res.json({ data: cart });
     } catch (err) {
         return err;
     }
