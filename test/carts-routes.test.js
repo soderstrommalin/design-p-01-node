@@ -12,6 +12,10 @@ describe("Test GET /api/carts/:userLogin", () => {
         const res = await request.get(`/api/carts/123`);
         expect(res.status).toBe(404);
     });
+    test("Test non existing cart from user", async () => {
+        const res = await request.get(`/api/carts/423274618461`);
+        expect(res.status).toBe(404);
+    });
 });
 
 describe("Test POST /api/carts/:userLogin", () => {});

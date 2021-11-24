@@ -1,11 +1,11 @@
 const { database } = require("../db/database.js");
-const { NoExistingUser } = require("../errors/errors.js");
+const { NoExistingCart } = require("../errors/errors.js");
 
 const cartArr = database[0].carts;
 const getUserCart = (id) => {
     try {
         const cartIndex = cartArr.findIndex((r) => r.login == id);
-        if (cartIndex === -1) throw new NoExistingUser();
+        if (cartIndex === -1) throw new NoExistingCart();
         const cart = cartArr[cartIndex].cart;
         return cart;
     } catch (err) {
