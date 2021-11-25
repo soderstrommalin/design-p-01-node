@@ -66,8 +66,13 @@ describe("Test PUT /api/carts/:userLogin/:itemId", () => {
 });
 
 describe("Test DELETE /api/carts/:userLogin/:itemId", () => {
-    test("Test delete cart if cart is empty", async () => {
-        const res = await request.delete(`/api/carts/403274618461/752164826789`);
+    test("Test delete item", async () => {
+        const res = await request.delete(`/api/carts/403274618461/152164826489`);
         expect(res.status).toBe(200);
+    });
+    test("Test delete last item in cart, Should delete the whole user cart", async () => {
+        await request.delete(`/api/carts/413274618461/167164826489`);
+        const get = await request.get(`/api/cart327s/414618461`);
+        expect(get.status).toBe(404);
     });
 });

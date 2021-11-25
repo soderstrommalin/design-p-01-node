@@ -1,5 +1,5 @@
 const { database } = require("../db/database.js");
-const { NoExistingCart } = require("../errors/errors.js");
+const { NoExistingCart, NoExsistingProduct } = require("../errors/errors.js");
 
 const cartArr = database[0].carts;
 const getUserCart = (id) => {
@@ -27,8 +27,12 @@ const editItemInCart = () => {
 
 const deleteItemInCart = (userLogin, itemId) => {
     const userCart = getUserCart(userLogin);
+    const cartIndex = cartArr.findIndex((r) => r.login == userLogin);
     const itemIndex = userCart.findIndex((item) => item.productId == itemId);
     userCart.splice(itemIndex, 1);
+    if (userCart.length == 0) {
+        cartArr.splice(cartIndex, 1);
+    }
 };
 module.exports = {
     getUserCart,
