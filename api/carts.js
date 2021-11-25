@@ -1,3 +1,4 @@
+const { InvalidCredentials } = require("../errors/errors");
 const cartsModel = require("../models/carts");
 const { getUserById } = require("../models/users");
 
@@ -16,6 +17,13 @@ const addToUserCart = async (req, res, next) => {
     const { userLogin } = req.params;
     const cart = req.body.cart
     try{
+        cart.forEach((product) => {
+                /* console.log(product.productId, product.amount) */
+            if(product.productId == undefined || product.amount == undefined){
+                throw new InvalidCredentials
+            }
+        })
+
         cartsModel.addToUserCart(userLogin, cart)
         res.json({msg: `Cart created for ${userLogin}`})
     }catch(err){
