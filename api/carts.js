@@ -12,7 +12,16 @@ const getUserCart = (req, res, next) => {
     }
 };
 
-const addToUserCart = async (req, res, next) => {};
+const addToUserCart = async (req, res, next) => {
+    const { userLogin } = req.params;
+    const cart = req.body.cart
+    try{
+        cartsModel.addToUserCart(userLogin, cart)
+        res.json({msg: `Cart created for ${userLogin}`})
+    }catch(err){
+        next(err)
+    }
+};
 
 const editItemInCart = async (req, res, next) => {};
 

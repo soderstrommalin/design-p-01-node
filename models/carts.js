@@ -13,7 +13,13 @@ const getUserCart = (id) => {
     }
 };
 
-const addToUserCart = () => {};
+const addToUserCart = (login, cart) => {
+    if(cartArr.find(cart => cart.login == login)){
+        throw Error
+    }
+    console.log({login: login, cart})
+    cartArr.push({login: login, cart})
+};
 
 const editItemInCart = () => {};
 
