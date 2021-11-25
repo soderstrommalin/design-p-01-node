@@ -23,27 +23,23 @@ describe("Test POST /api/carts/:userLogin", () => {
         const res = await request.post(`/api/carts/423274618461`).send({
             cart: [
                 {
-                    amount: 2
-                }
-            ]
-        })
-        expect(res.status).toBe(403)
-    })
-    /* test("Test invalid credentials to throw error", async () => {
-        const res = await request.post(`/api/carts/${login}`).send({
+                    amount: 2,
+                },
+            ],
+        });
+        expect(res.status).toBe(403);
+    });
+    test("Test valid product", async () => {
+        const res = await request.post("/api/carts/423274618461").send({
             cart: [
                 {
-                    productId: "167164826489",
-                    amount: 2
+                    productId: 123,
+                    amount: 5,
                 },
-                {
-                    productId: "752164826789",
-                    amount: 2
-                }
-            ]
-        })
-        expect(res.status).toBe(404)
-    }) */
+            ],
+        });
+        expect(res.status).toBe(404);
+    });
 });
 
 describe("Test PUT /api/carts/:userLogin/:itemId", () => {});
