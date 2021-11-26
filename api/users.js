@@ -1,6 +1,6 @@
 const usersModel = require("../models/users");
 const { v4: uuidv4 } = require("uuid");
-const { InvalidBody, NoExistingUser } = require("../errors/errors.js");
+const { InvalidBody } = require("../errors/errors.js");
 
 const getAllUsers = async (req, res, next) => {
     try {

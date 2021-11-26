@@ -1,14 +1,14 @@
 const { database } = require("../db/database.js");
 const { v4: uuidv4 } = require("uuid");
 const { NoExsistingProduct } = require("../errors/errors.js");
-const productsArr = database[0].products;
+const allProducts = database[0].products;
 
 const getAllProducts = () => {
-    return productsArr;
+    return allProducts;
 };
 
 const getProductById = (id) => {
-    const product = productsArr.find((prod) => prod.id == id);
+    const product = allProducts.find((prod) => prod.id == id);
     if (product == undefined) throw new NoExsistingProduct();
     return product;
 };
@@ -19,7 +19,7 @@ const postProduct = (name, price) => {
         name: name,
         price: price,
     };
-    productsArr.push(product);
+    allProducts.push(product);
 };
 
 const editProductById = (id, name, price) => {
@@ -30,9 +30,9 @@ const editProductById = (id, name, price) => {
 };
 
 const deleteProductById = (id) => {
-    const productIndex = productsArr.findIndex((prod) => prod.id == id);
+    const productIndex = allProducts.findIndex((prod) => prod.id == id);
     if (productIndex == -1) throw new NoExsistingProduct();
-    productsArr.splice(productIndex, 1);
+    allProducts.splice(productIndex, 1);
 };
 
 module.exports = {
