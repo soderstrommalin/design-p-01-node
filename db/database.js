@@ -16,7 +16,8 @@ const database = [
         ],
         carts: [
             {
-                "403274618461": [
+                login: "403274618461",
+                cart: [
                     {
                         productId: "152164826489",
                         amount: 2,
@@ -26,7 +27,10 @@ const database = [
                         amount: 1,
                     },
                 ],
-                "413274618461": [
+            },
+            {
+                login: "413274618461",
+                cart: [
                     {
                         productId: "167164826489",
                         amount: 1,
