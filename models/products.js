@@ -1,8 +1,7 @@
 const { database } = require("../db/database.js");
 const { v4: uuidv4 } = require("uuid");
 const { NoExsistingProduct } = require("../errors/errors.js");
-const productsArr = [];
-database[0].products.forEach((r) => productsArr.push(r));
+const productsArr = database[0].products;
 
 const getAllProducts = () => {
     return productsArr;
