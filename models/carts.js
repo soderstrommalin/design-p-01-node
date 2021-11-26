@@ -10,9 +10,7 @@ const getUserCart = (id) => {
 };
 
 const addToUserCart = (login, cart) => {
-    if (cartArr.find((cart) => cart.login == login)) {
-        throw new NoExistingCart();
-    }
+    if (cartArr.find((cart) => cart.login == login)) throw new NoExistingCart();
     cartArr.push({ login: login, cart });
 };
 
@@ -22,25 +20,18 @@ const editItemInCart = (userLogin, productId, amount) => {
     const cartIndex = cartArr.find((user) => user.login == userLogin);
 
     cartIndex.cart[cartItem].amount = amount;
-    if (cartIndex.cart[cartItem].amount < 1) {
-        deleteItemInCart(userLogin, productId);
-    }
-    if (userCart == undefined) {
-        throw new NoExistingCart();
-    }
-    if (cartItem == undefined) {
-        throw new NoExsistingProduct();
-    }
+    if (cartIndex.cart[cartItem].amount < 1) deleteItemInCart(userLogin, productId);
+    if (userCart == undefined) throw new NoExistingCart();
+    if (cartItem == undefined) throw new NoExsistingProduct();
 };
 
 const deleteItemInCart = (userLogin, itemId) => {
     const userCart = getUserCart(userLogin);
     const cartIndex = cartArr.findIndex((r) => r.login == userLogin);
     const itemIndex = userCart.findIndex((item) => item.productId == itemId);
+    if (itemIndex == -1) throw new NoExsistingProduct();
     userCart.splice(itemIndex, 1);
-    if (userCart.length == 0) {
-        cartArr.splice(cartIndex, 1);
-    }
+    if (userCart.length == 0) cartArr.splice(cartIndex, 1);
 };
 module.exports = {
     getUserCart,
